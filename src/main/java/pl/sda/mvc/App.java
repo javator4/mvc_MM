@@ -1,10 +1,7 @@
 package pl.sda.mvc;
 
 import pl.sda.mvc.controller.GiantController;
-import pl.sda.mvc.model.Fatigue;
-import pl.sda.mvc.model.GiantModel;
-import pl.sda.mvc.model.Health;
-import pl.sda.mvc.model.Nourishment;
+import pl.sda.mvc.model.*;
 import pl.sda.mvc.view.GiantView;
 
 /**
@@ -15,17 +12,13 @@ public class App
 {
     public static void main( String[] args )
     {
-        GiantModel giantModel = new GiantModel(Health.HEALTHY, Fatigue.TIRED, Nourishment.HUNGRY);
 
-        GiantView giantView = new GiantView();
+        GiantController giantController = new GiantController(new GiantModel(), new GiantView(), new GiantsList());
 
-        GiantController giantController = new GiantController(giantModel,giantView);
-
-        giantController.setHealth(Health.DEAD);
+        giantController.setHealth(Health.HEALTHY, 2);
+        giantController.setFatigue(Fatigue.TIRED, 2);
+        giantController.setFatigue(Fatigue.TIRED, 0);
+        giantController.setName("ksieciunio", 1);
         giantController.updateView();
-        giantController.setFatigue(Fatigue.NOTTIRED);
-        giantController.updateView();
-
-
     }
 }
